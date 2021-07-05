@@ -17,6 +17,7 @@ var enemyAttack = 12;
 
 
 var fight = function(enemyName)  {
+    var damage = randomNumber(playerAttack-3, playerAttack);
      // repeat and execute as long as the enemy-robot is alive 
     while(playerHealth > 0 && enemyHealth > 0){
 
@@ -33,13 +34,13 @@ var fight = function(enemyName)  {
             window.alert(playerName + " has decided to skip this fight. Goodbye!");
         
         // subtract money from playerMoney for skipping
-        playerMoney = playerMoney - 10;
+        playerMoney = Math.max(0, playerMoney - 10);
         console.log ("playerMoney", playerMoney);
         break;
         }
     }
         // remove enemy's health by subtracting the amount set in the playerAttack variable
-        enemyHealth = enemyHealth - playerAttack;
+        enemyHealth = Math.max(0, enemyHealth-damage);
 
         console.log(
             playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
@@ -55,7 +56,7 @@ var fight = function(enemyName)  {
         window.alert(enemyName + " still has " + enemyHealth + " health left.");
         }
         // remove player's health by subtracting the amount set in the enemyAttack variable
-        playerHealth = playerHealth - enemyAttack;
+        playerHealth = Math.max(0, playerHealth - damage);
     
         console.log(
             enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
@@ -70,6 +71,11 @@ var fight = function(enemyName)  {
         window.alert(playerName + " still has " + playerHealth + " health left.");
         }
     }
+};
+
+var randomNumber = function(min,max){
+    var value = Math.floor(Math.random() * (max-min + 1) + min);
+    return value;
 };
 
 
@@ -89,7 +95,7 @@ for (var i=0; i<enemyNames.length;i++){
         //pick new emeny to fight based on the index of the enemyNames array
         var pickedEnemyName = enemyNames[i];
         //reset enemyHealth before starting new fight
-        enemyHealth = 50;
+        enemyHealth = randomNumber(40,60);
         //use debugger to pause script from running and check what's going on with the code at this moment
         //debugger;
         //pass the pickedEnemyName variable's value into the fight function where it will assume the value of the enemyName parameter
