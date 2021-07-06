@@ -172,14 +172,12 @@ for (var i=0; i<enemyInfo.length;i++){
 };
 
 var endGame = function() {
-    window.alert("The game has now ended. Let's see how you did!");
     if (playerInfo.health > 0) {
         window.alert ("Great job, you've survived the game! You now have a score of " + playerInfo.money + ".");
     }
     else{
         window.alert("You've lost your robot in battle.");
     }
-}
 
 var playAgainConfirm = window.confirm("Would you like to play again?");
 if (playAgainConfirm) {
@@ -189,23 +187,23 @@ if (playAgainConfirm) {
 else{
     window.alert("Thank you for playing Robot Gladiators! Come back soon!");
 }
+};
 
 var shop = function(){
     var shopOptionPrompt = window.prompt(
-        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one 1 for 'REFILL', 2 for 'UPGRADE', or 3 for 'LEAVE'."
     );
+
+    shopOptionPrompt = parseInt(shopOptionPrompt);
     //use switch for options
     switch (shopOptionPrompt) {
-        case "REFILL":
-        case "refill":
+        case 1:
             playerInfo.refillHealth();
             break;
-        case "UPGRADE":
-        case "upgrade":
+        case 2:
             playerInfo.upgradeAttack();
             break;
-        case "LEAVE":
-        case "leave":
+        case 3:
             window.alert("Leaving the store.");
             //dont do anything here so function will end
             break;
@@ -215,7 +213,8 @@ var shop = function(){
             shop();
             break;
     }
-}
+    
+};
 
 
 startGame();
